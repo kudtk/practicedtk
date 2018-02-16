@@ -13,7 +13,7 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link ishino.OnFragmentInteractionListener} interface
- * to handle interaction events.
+ * to handle interaction events.jojpojepoj
  * Use the {@link ishino#newInstance} factory method to
  * create an instance of this fragment.
  */
