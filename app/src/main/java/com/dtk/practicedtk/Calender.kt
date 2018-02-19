@@ -3,10 +3,14 @@ package com.dtk.practicedtk
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_calender.*
 
 
 /**
@@ -46,6 +50,20 @@ class Calender : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        activity.calendarView.setOnDateChangeListener { calendarView, year, month, day ->
+            var args = Bundle()
+            var daylist = arrayListOf<Int>()
+            daylist.add(year)
+            daylist.add(month)
+            daylist.add(day)
+            args.putIntegerArrayList("day",daylist)
+            var Custom_dialog = Custom_saito_dialog()
+            Custom_dialog.arguments = args
+            Custom_dialog.show(activity.fragmentManager,"s")
+        }
+    }
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 //        if (context is OnFragmentInteractionListener) {

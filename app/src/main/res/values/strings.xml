@@ -8,4 +8,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="ramen">
+        <item>なし</item>
+        <item>塩</item>
+        <item>醤油</item>
+        <item>豚骨</item>
+        <item>魚介</item>
+        <item>味噌</item>
+    </string-array>
 </resources>
