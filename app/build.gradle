@@ -34,4 +34,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'org.jetbrains.anko:anko:0.10.1'
     compile "org.jetbrains.anko:anko-sqlite:0.10.1"
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
 }
