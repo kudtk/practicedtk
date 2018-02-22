@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.view.LayoutInflater
@@ -30,12 +31,9 @@ class BlankFragment_test_fuji : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_blank_fragment_test_fuji)
+        //setContentView(R.layout.fragment_blank_fragment_test_fuji)
 
-        val listView = findViewById(R.id.listView) as ListView
-        val dataArray = arrayOf("Kotlin","Android","iOS","Swift","Java")
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, dataArray)
-        listView.adapter = adapter
+
         if (arguments != null) {
             mParam1 = arguments.getString(ARG_PARAM1)
             mParam2 = arguments.getString(ARG_PARAM2)
@@ -55,6 +53,13 @@ class BlankFragment_test_fuji : Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        val dataArray = arrayOf("Kotlin","Android","iOS","Swift","Java")
+        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, dataArray)
+        listView.adapter = adapter
+
+    }
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
