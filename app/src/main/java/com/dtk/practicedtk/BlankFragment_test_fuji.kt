@@ -62,11 +62,7 @@ class BlankFragment_test_fuji : Fragment() {
     }
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            mListener = context
-        } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-        }
+
     }
 
     override fun onDetach() {
