@@ -8,4 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message_text"></string>
+    <string name="button_text">引く(draw)</string>
+    <string name="message2_text">ラーメンおみくじ\nRamenOmikuji</string>
 </resources>
