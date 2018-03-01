@@ -18,6 +18,7 @@ import android.widget.Toast
 import android.content.pm.PackageManager
 
 
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val REQUEST_PERMISSION = 1002

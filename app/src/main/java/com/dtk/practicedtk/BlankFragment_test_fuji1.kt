@@ -4,29 +4,24 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_blank_fragment_test_fuji.*
-import android.widget.Toast
 import android.widget.AdapterView
-
-
+import android.widget.ArrayAdapter
+import kotlinx.android.synthetic.main.fragment_blank_fragment_test_fuji.*
 
 
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [BlankFragment_test_fuji.OnFragmentInteractionListener] interface
+ * [BlankFragment_test_fuji1.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [BlankFragment_test_fuji.newInstance] factory method to
+ * Use the [BlankFragment_test_fuji1.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BlankFragment_test_fuji : Fragment() {
+class BlankFragment_test_fuji1 : Fragment() {
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -36,21 +31,16 @@ class BlankFragment_test_fuji : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.fragment_blank_fragment_test_fuji)
-
-
         if (arguments != null) {
             mParam1 = arguments.getString(ARG_PARAM1)
             mParam2 = arguments.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-
-        return inflater!!.inflate(R.layout.fragment_blank_fragment_test_fuji, container, false)
+        return inflater!!.inflate(R.layout.fragment_blank_fragment_test_fuji1, container, false)
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -59,20 +49,15 @@ class BlankFragment_test_fuji : Fragment() {
             mListener!!.onFragmentInteraction(uri)
         }
     }
-
     override fun onStart() {
         super.onStart()
-        val dataArray = arrayOf("現在地付近","最寄り駅から選ぶ","住所を手動で選択")
+        val dataArray = arrayOf("aaa","bbb","ccc")
         val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, dataArray)
         listView.adapter = adapter
-        listView.onItemClickListener=AdapterView.OnItemClickListener { adapterView, view, i, l ->
+        listView.onItemClickListener= AdapterView.OnItemClickListener { adapterView, view, i, l ->
             when{
                 i==0 ->{
                     Log.d("case i==0",i.toString())
-                    //val transaction = fragmentManager.beginTransaction()
-                    //transaction.replace(R.id.container, BlankFragment_test_fuji1.newInstance())
-                    //transaction.addToBackStack(null)
-                    //transaction.commit()
                 }
                 i==1->{
                     Log.d("case i==1",i.toString())
@@ -81,13 +66,18 @@ class BlankFragment_test_fuji : Fragment() {
                     Log.d("case i==2",i.toString())
                 }
             }
-        //Log.d("test",i.toString())
+            //Log.d("test",i.toString())
         }
 
     }
+
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-
+        if (context is OnFragmentInteractionListener) {
+            mListener = context
+        } else {
+            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+        }
     }
 
     override fun onDetach() {
@@ -121,11 +111,11 @@ class BlankFragment_test_fuji : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragment_test_fuji.
+         * @return A new instance of fragment BlankFragment_test_fuji1.
          */
         // TODO: Rename and change types and number of parameters
-        fun newInstance(param1: String, param2: String): BlankFragment_test_fuji {
-            val fragment = BlankFragment_test_fuji()
+        fun newInstance(param1: String, param2: String): BlankFragment_test_fuji1 {
+            val fragment = BlankFragment_test_fuji1()
             val args = Bundle()
             args.putString(ARG_PARAM1, param1)
             args.putString(ARG_PARAM2, param2)
