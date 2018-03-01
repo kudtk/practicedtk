@@ -8,6 +8,6 @@ import org.jetbrains.anko.db.MapRowParser
  */
 class Listparse : MapRowParser<DbData>{
     override fun parseRow(columns: Map<String, Any?>): DbData {
-        return DbData(columns["id"] as Long? , columns["year"] as Long?,columns["month"] as Long?,columns["day"] as Long?,columns["ramen"] as String?,columns["uri"] as String?)
+        return DbData(columns["id"] as Long? , columns["year"] as Long?,columns["month"] as Long?,columns["day"] as Long?,columns["ramen"] as Long?,columns["uri"] as String?)
     }
 }

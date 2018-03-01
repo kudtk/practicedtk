@@ -30,6 +30,7 @@ import com.dtk.practicedtk.MainActivity
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.graphics.Camera
+import android.os.Debug
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.select
 
@@ -51,23 +52,27 @@ class Custom_saito_dialog : DialogFragment() {
         var args_day = arguments.getIntegerArrayList("day")
         val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val content = inflater.inflate(R.layout.dialog_saito, dialog_view)
-        var list = Db.readableDatabase.select(DBHelper.tableName).whereArgs("(year == {year} and month == {month} and day == {day})" ,"year" to args_day[0].toString() , "month" to args_day[1].toString() , "day" to args_day[2].toString()).parseList<DbData>(Listparse())
+        var list : List<DbData> = Db.readableDatabase.select(DBHelper.tableName).whereArgs("(year == {year} and month == {month} and day == {day})" ,"year" to args_day[0].toString() , "month" to args_day[1].toString() , "day" to args_day[2].toString()).parseList<DbData>(Listparse())
         builder.setView(content)
+        var spin = content.findViewById<Spinner>(R.id.spinner)
         imageview = content.findViewById(R.id.image_view)
-        if(list != null) {
-            imageview!!.setImageURI(Uri.parse(list[0].component6().toString()))
-        }
+        Log.d("com",list.toString())
+
          content.findViewById<TextView>(R.id.year_text).text = args_day[0].toString()
          content.findViewById<TextView>(R.id.month_text).text = args_day[1].toString()
          content.findViewById<TextView>(R.id.day_text).text = args_day[2].toString()
 
 
 
-        var spin = content.findViewById<Spinner>(R.id.spinner)
         val adapter = ArrayAdapter.createFromResource(activity,
                 R.array.ramen, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spin.adapter = adapter
+        if(list.toString() != "[]") {
+            imageview!!.setImageURI(Uri.parse(list[0].component6().toString()))
+            spin.setSelection(list[0].component5()!!.toInt())
+            cameraUri = Uri.parse(list[0].component6().toString())
+        }
         content.findViewById<Button>(R.id.camera_button).setOnClickListener {
             AlertDialog.Builder(activity).setPositiveButton("take photo",DialogInterface.OnClickListener { dialogInterface, i ->
                 // 保存先のフォルダーを作成
@@ -104,7 +109,7 @@ class Custom_saito_dialog : DialogFragment() {
         builder.setMessage("設定")
                 .setPositiveButton("ok",DialogInterface.OnClickListener { dialog, id ->
                     Db.use {
-                        insert(DBHelper.tableName,*arrayOf("year" to args_day[0].toLong(),"month" to args_day[1].toLong(),"day" to args_day[2].toLong(),"ramen" to  content.findViewById<Spinner>(R.id.spinner).selectedItem.toString(),"uri" to cameraUri.toString()))
+                        insert(DBHelper.tableName,*arrayOf("year" to args_day[0].toLong(),"month" to args_day[1].toLong(),"day" to args_day[2].toLong(),"ramen" to  spin.selectedItemPosition.toLong(),"uri" to cameraUri.toString()))
                     }
                 })
                 .setNegativeButton("閉じる", DialogInterface.OnClickListener { dialog, id ->

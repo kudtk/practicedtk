@@ -10,6 +10,6 @@ data class DbData(
         var year:Long?,
         var month :Long?,
         var day:Long?,
-        var ramen:String?,
+        var ramen:Long?,
         var uri:String?
         )
