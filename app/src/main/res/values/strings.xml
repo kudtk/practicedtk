@@ -16,4 +16,7 @@
         <item>魚介</item>
         <item>味噌</item>
     </string-array>
+    <string name="message_text"></string>
+    <string name="button_text">引く(draw)</string>
+    <string name="message2_text">ラーメンおみくじ\nRamenOmikuji</string>
 </resources>
