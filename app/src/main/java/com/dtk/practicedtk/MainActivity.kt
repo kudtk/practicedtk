@@ -2,6 +2,13 @@ package com.dtk.practicedtk
 
 import android.Manifest
 import android.os.Bundle
+
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -22,6 +29,9 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private val REQUEST_PERMISSION = 1002
+
+class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var mMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,6 +113,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_gallery -> {
                 fragment_transaction.replace(R.id.container,BlankFragment_test_fuji()).commit()
+                setContentView(R.layout.activity_maps)
+                // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+                val mapFragment = supportFragmentManager
+                        .findFragmentById(R.id.map) as SupportMapFragment
+                mapFragment.getMapAsync(this)
             }
             R.id.nav_slideshow -> {
                 fragment_transaction.replace(R.id.container,Calender()).commit()
