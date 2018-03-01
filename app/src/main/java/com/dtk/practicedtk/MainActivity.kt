@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -17,7 +18,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -29,6 +29,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val fragment = BlankFragment_test_fuji()
+        //いった変更を行う際は、Transactionを利用します
+        val transaction = supportFragmentManager.beginTransaction()
+        // 新しく追加を行うのでaddを使用します
+        // 他にも、よく使う操作で、replace removeといったメソッドがあります
+        // メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
+        transaction.add(R.id.container, fragment)
+        // 最後にcommitを使用することで変更を反映します
+        transaction.commit()
     }
 
     override fun onBackPressed() {
