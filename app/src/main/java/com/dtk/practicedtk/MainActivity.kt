@@ -26,11 +26,10 @@ import android.content.pm.PackageManager
 
 
 import kotlinx.android.synthetic.main.content_main.*
-
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
     private val REQUEST_PERMISSION = 1002
 
-class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+
     private lateinit var mMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,7 +86,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
             super.onBackPressed()
         }
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
@@ -112,7 +110,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 fragment_transaction.replace(R.id.container,ishino()).commit()
             }
             R.id.nav_gallery -> {
-                fragment_transaction.replace(R.id.container,BlankFragment_test_fuji()).commit()
                 setContentView(R.layout.activity_maps)
                 // Obtain the SupportMapFragment and get notified when the map is ready to be used.
                 val mapFragment = supportFragmentManager
@@ -120,10 +117,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
                 mapFragment.getMapAsync(this)
             }
             R.id.nav_slideshow -> {
-                fragment_transaction.replace(R.id.container,Calender()).commit()
+                fragment_transaction.replace(R.id.container,BlankFragment_test_fuji()).commit()
             }
             R.id.nav_manage -> {
-
+                fragment_transaction.replace(R.id.container,Calender()).commit()
             }
             R.id.nav_share -> {
 
@@ -135,5 +132,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, NavigationView.OnN
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onMapReady(p0: GoogleMap) {
+        mMap = p0
+
+        val sydney = LatLng(-34.0,151.0)
+        mMap.addMarker(MarkerOptions().position(sydney).title("sydney"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }
