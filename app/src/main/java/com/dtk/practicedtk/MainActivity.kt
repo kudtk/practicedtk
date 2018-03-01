@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
+        val fragment_transaction = supportFragmentManager.beginTransaction()
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
@@ -96,15 +96,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
+        val fragment_transaction = supportFragmentManager.beginTransaction()
         when (item.itemId) {
             R.id.nav_camera -> {
-                // Handle the camera action
+                fragment_transaction.replace(R.id.container,ishino()).commit()
             }
             R.id.nav_gallery -> {
-
+                fragment_transaction.replace(R.id.container,BlankFragment_test_fuji()).commit()
             }
             R.id.nav_slideshow -> {
-
+                fragment_transaction.replace(R.id.container,Calender()).commit()
             }
             R.id.nav_manage -> {
 
